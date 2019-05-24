@@ -1,0 +1,30 @@
+<h1> <%= @cocktail.name %> </h1>
+
+<%= simple_form_for([@cocktail, @dose]) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+      <div class="form-inputs">
+        <%= f.association :ingredient %>
+      </div>
+
+       <div class="form-inputs">
+        <%= f.input :description %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.button :submit, class: 'btn-block btn-primary' %>
+      </div>
+    <% end %>
+
+
+<% @cocktail.doses.each do |dose| %>
+  <h2><%= dose.description %></h2>
+
+<% end %>
+
+<% @cocktail.ingredients.each do |ingredient| %>
+  <h2><%= ingredient.name %></h2>
+<% end %>
+
+<%= link_to 'Back', root_path %>
